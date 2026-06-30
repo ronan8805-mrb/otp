@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Airways — International Terminal | Live Resin Vape</title>
+  <meta name="description" content="Over The Pond — Premium Live Resin Vape. Life's a Trip. Board OTP Airways for the Dual-Chamber Twist v6.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- ═══ AGE GATE: PASSPORT SCAN ═══ -->
+  <div id="age-gate" class="age-gate">
+    <div id="passport-card" class="passport-card">
+      <div class="passport-scan-line"></div>
+      <div class="passport-chip"></div>
+      <h2 class="passport-title">OTP AIRWAYS</h2>
+      <p class="passport-sub">International Terminal · Gate Verification Required</p>
+      <img src="assets/logo-otp-gold-red.jpg" alt="OTP Logo" style="width:80px;margin:0 auto 1.5rem;display:block;border-radius:50%">
+      <form id="age-form" class="age-form">
+        <input type="text" id="passenger-name" placeholder="Passenger Name (as on ID)" autocomplete="name">
+        <input type="date" id="dob-input" placeholder="Date of Birth" required aria-label="Date of Birth">
+        <p style="font-size:0.7rem;color:var(--otp-silver);line-height:1.5;margin-bottom:1rem">
+          By entering, you confirm you are 21+ and agree to OTP's Safety Brief. Cannabis products — adults only.
+        </p>
+        <button type="submit" class="btn btn-gold" style="width:100%">Scan Passport &amp; Verify Age</button>
+      </form>
+    </div>
+
+    <div id="boarding-pass" class="boarding-pass">
+      <div class="pass-header">
+        <span style="font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.1em">OTP AIRWAYS</span>
+        <span style="font-size:0.7rem;letter-spacing:0.15em">BOARDING PASS</span>
+      </div>
+      <div class="pass-stripe"></div>
+      <div class="pass-body">
+        <div>
+          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:0">PASSENGER</p>
+          <p id="pass-name" style="font-family:var(--font-display);font-size:1.8rem;margin:0.25rem 0 1rem">GUEST FLYER</p>
+          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:0">FLIGHT</p>
+          <p id="pass-flight" style="font-weight:700;margin:0.25rem 0">OTP420</p>
+          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:1rem 0 0">GATE</p>
+          <p id="pass-gate" style="font-weight:700;margin:0.25rem 0">A7</p>
+        </div>
+        <div style="text-align:right">
+          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:0">SEAT</p>
+          <p id="pass-seat" style="font-family:var(--font-display);font-size:2.5rem;color:var(--otp-red);margin:0.25rem 0 1rem">4A</p>
+          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:0">DATE</p>
+          <p id="pass-date" style="font-weight:700;margin:0.25rem 0">JUN 30, 2026</p>
+          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:1rem 0 0">CLASS</p>
+          <p style="font-weight:700;color:var(--otp-gold);margin:0.25rem 0">FIRST CLASS</p>
+        </div>
+      </div>
+      <div class="pass-barcode"></div>
+      <div style="padding:1.5rem;text-align:center">
+        <p style="font-family:var(--font-script);font-size:1.3rem;color:var(--otp-red);margin:0 0 1rem">Prepare for Takeoff</p>
+        <button id="enter-terminal" class="btn btn-red">Enter International Terminal →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TERMINAL NAV ═══ -->
+  <nav class="terminal-nav">
+    <a href="#" class="logo">
+      <img src="assets/logo-over-the-pond.jpg" alt="OTP — Over The Pond">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero">Departures</a></li>
+      <li><a href="#routes">Route Map</a></li>
+      <li><a href="#configurator">Hangar</a></li>
+      <li><a href="#packaging">Baggage Claim</a></li>
+      <li><a href="#ffc">Frequent Flyer</a></li>
+      <li><a href="#shop">Duty Free</a></li>
+      <li><a href="#tracker">Flight Status</a></li>
+      <li><a href="#safety">Safety Brief</a></li>
+    </ul>
+    <span class="nav-gate">Gate A1 · OTP International</span>
+    <button id="nav-toggle" class="nav-mobile-toggle" aria-label="Menu">☰</button>
+  </nav>
+
+  <!-- ═══ HERO: TAKEOFF WINDOW ═══ -->
+  <section id="hero" class="hero">
+    <div class="hero-window">
+      <div class="hero-cloud hero-cloud-1"></div>
+      <div class="hero-cloud hero-cloud-2"></div>
+      <div class="hero-cloud hero-cloud-3"></div>
+    </div>
+    <div class="hero-frame"></div>
+    <div class="hero-content">
+      <img src="assets/device-red-twist.jpg" alt="OTP Twist v6 Device" class="hero-device" id="hero-device">
+      <p class="hero-tagline">Prepare for Takeoff</p>
+      <h1 class="hero-headline">LIFE'S A TRIP</h1>
+      <p class="hero-sub">Dual-Chamber Twist v6 · Live Resin Vape</p>
+      <div class="hero-ctas">
+        <a href="#configurator" class="btn btn-gold">Configure Your Flight</a>
+        <a href="#shop" class="btn btn-outline">Reserve a Seat</a>
+        <a href="#routes" class="btn btn-teal">Explore Routes</a>
+      </div>
+    </div>
+    <div class="hero-ticker">
+      <div class="ticker-track">
+        <span>✈ Fasten Your Seatbelts</span>
+        <span>·</span>
+        <span>OTP Airways International</span>
+        <span>·</span>
+        <span>Live Resin · Premium Cannabis</span>
+        <span>·</span>
+        <span>CDG → LHR → DUB → MAD → FRA → BRU → ROM</span>
+        <span>·</span>
+        <span>21+ Only · Fly Responsibly</span>
+        <span>·</span>
+        <span>✈ Fasten Your Seatbelts</span>
+        <span>·</span>
+        <span>OTP Airways International</span>
+        <span>·</span>
+        <span>Live Resin · Premium Cannabis</span>
+        <span>·</span>
+        <span>CDG → LHR → DUB → MAD → FRA → BRU → ROM</span>
+        <span>·</span>
+        <span>21+ Only · Fly Responsibly</span>
+        <span>·</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ JOURNEY: BOARDING → CRUISING → LANDING ═══ -->
+  <section id="journey" class="journey">
+    <div class="container">
+      <p class="section-label">Your Flight Experience</p>
+      <h2 class="section-title">BOARD · CRUISE · LAND</h2>
+      <p class="section-desc">Every OTP session is a three-act journey. Scroll to taxi down the runway of flavor — from gate check to touchdown.</p>
+      <div class="journey-track">
+        <div class="journey-card active" data-phase="0">
+          <div class="journey-icon">🛫</div>
+          <div class="journey-phase">BOARDING</div>
+          <p style="color:var(--otp-silver);font-size:0.9rem;margin-top:0.75rem">Unbox your route. Peel the travel stamps. Twist to your departure flavor. The yellow dual-chamber window shows your two destinations.</p>
+        </div>
+        <div class="journey-card" data-phase="1">
+          <div class="journey-icon">✈️</div>
+          <div class="journey-phase">CRUISING</div>
+          <p style="color:var(--otp-silver);font-size:0.9rem;margin-top:0.75rem">Mid-flight twist. Switch chambers like changing time zones. Watch your TRIPS counter climb — every pull is a mile earned.</p>
+        </div>
+        <div class="journey-card" data-phase="2">
+          <div class="journey-icon">🛬</div>
+          <div class="journey-phase">LANDING</div>
+          <p style="color:var(--otp-silver);font-size:0.9rem;margin-top:0.75rem">Smooth touchdown. Premium live resin delivers a first-class finish. Collect your OTP Miles and book the next adventure.</p>
+        </div>
+      </div>
+      <div class="journey-progress"><div class="journey-progress-bar"></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ ROUTE MAP: 3D GLOBE ═══ -->
+  <section id="routes" class="routes-section">
+    <div class="container" style="text-align:center">
+      <p class="section-label">Global Flavor Network</p>
+      <h2 class="section-title">ROUTE MAP</h2>
+      <p class="section-desc" style="margin:0 auto 2rem">Spin the globe. Click a passport stamp to unlock a flavor route. Each destination is a curated live resin experience.</p>
+      <div class="globe-container">
+        <canvas id="globe-canvas"></canvas>
+      </div>
+      <div id="route-panel" class="route-panel">
+        <div class="section-label">Select a Stamp</div>
+        <p style="color:var(--otp-silver)">Rotate the globe and tap a destination code — CDG, LHR, DUB, MAD, FRA, BRU, or ROM — to reveal its flavor route.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONFIGURATOR: TWIST v6 ═══ -->
+  <section id="configurator" class="configurator">
+    <div class="container">
+      <p class="section-label">Hangar Bay 7</p>
+      <h2 class="section-title">BUILD YOUR TWIST</h2>
+      <p class="section-desc">Rotate the device. Drag the twist slider to switch chambers. Simulate puffs and watch your TRIPS counter soar.</p>
+      <div class="config-grid">
+        <div class="config-device-wrap">
+          <img id="config-device" class="config-device" src="assets/device-red-twist.jpg" alt="OTP Twist v6 Configurator" draggable="false">
+          <div id="chamber-window" class="chamber-window"></div>
+        </div>
+        <div class="config-controls">
+          <div>
+            <p style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--otp-gold);margin-bottom:0.75rem">Aircraft Colorway</p>
+            <div class="color-swatch">
+              <button class="swatch swatch-red active" data-color="red" aria-label="Crimson Route"></button>
+              <button class="swatch swatch-teal" data-color="teal" aria-label="Atlantic Route"></button>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--otp-gold);margin-bottom:0.75rem">Chamber A — Left</p>
+            <div class="flavor-select">
+              <button class="flavor-btn active" data-side="left" data-flavor="Orange Slush">Orange Slush</button>
+              <button class="flavor-btn" data-side="left" data-flavor="Cherry Lime">Cherry Lime</button>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--otp-gold);margin-bottom:0.75rem">Chamber B — Right</p>
+            <div class="flavor-select">
+              <button class="flavor-btn" data-side="right" data-flavor="Orange Slush">Orange Slush</button>
+              <button class="flavor-btn active" data-side="right" data-flavor="Cherry Lime">Cherry Lime</button>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--otp-gold);margin-bottom:0.75rem">Twist Chambers</p>
+            <input type="range" id="twist-slider" class="twist-slider" min="0" max="100" value="0" aria-label="Twist chamber selector">
+            <p style="font-size:0.75rem;color:var(--otp-silver);margin-top:0.5rem">Drag to twist between Chamber A ↔ B</p>
+          </div>
+          <div class="trip-counter">
+            <div>
+              <p style="font-size:0.65rem;letter-spacing:0.15em;margin:0;color:var(--otp-silver)">TRIPS</p>
+              <div id="trip-counter" class="trip-digits">0000</div>
+            </div>
+            <button id="puff-btn" class="btn btn-red">Simulate Puff ✈</button>
+          </div>
+          <a href="#shop" class="btn btn-gold" style="text-decoration:none;text-align:center">Add to Manifest — $45</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PACKAGING EXPLORER ═══ -->
+  <section id="packaging">
+    <div class="container">
+      <p class="section-label">Baggage Claim</p>
+      <h2 class="section-title">THE LUGGAGE</h2>
+      <p class="section-desc">From the white outer box with travel stamps to the red and teal inner editions — every package is a boarding pass to adventure.</p>
+      <div class="packaging-carousel">
+        <div class="pack-card">
+          <img src="assets/packaging-lifes-a-trip.jpg" alt="LIFE'S A TRIP outer packaging with travel stamps">
+          <div class="pack-card-body">
+            <h3>OUTER EXPEDITION BOX</h3>
+            <p style="font-size:0.85rem;color:var(--otp-silver);margin:0">White box · Passport stamps · CDG, UK, DUB, MAD, FRA, BRU, Rome · Dotted flight paths · "LIFE'S A TRIP"</p>
+          </div>
+        </div>
+        <div class="pack-card">
+          <img src="assets/packaging-white-box.jpg" alt="OTP white packaging box">
+          <div class="pack-card-body">
+            <h3>OVER THE POND EDITION</h3>
+            <p style="font-size:0.85rem;color:var(--otp-silver);margin:0">Clean white · Navy winged globe · Red &amp; blue stripes · "OVER THE POND" · "LIVE RESIN VAPE"</p>
+          </div>
+        </div>
+        <div class="pack-card">
+          <img src="assets/packaging-red-inner.jpg" alt="OTP red inner box">
+          <div class="pack-card-body">
+            <h3>CRIMSON INNER CABIN</h3>
+            <p style="font-size:0.85rem;color:var(--otp-silver);margin:0">Deep red · Gold wings logo · "FASTEN YOUR SEATBELTS" · "PREPARE FOR TAKEOFF" · Twist v6</p>
+          </div>
+        </div>
+        <div class="pack-card">
+          <img src="assets/packaging-teal-box.jpg" alt="OTP teal packaging box">
+          <div class="pack-card-body">
+            <h3>ATLANTIC TEAL EDITION</h3>
+            <p style="font-size:0.85rem;color:var(--otp-silver);margin:0">Matte teal · Gold foil logo · Vertical "OVER THE POND" spine · CA compliance badge</p>
+          </div>
+        </div>
+        <div class="pack-card">
+          <img src="assets/promo-red.jpg" alt="OTP red promotional graphic">
+          <div class="pack-card-body">
+            <h3>FIRST CLASS RED</h3>
+            <p style="font-size:0.85rem;color:var(--otp-silver);margin:0">Campaign creative · Gold OTP globe · Aviation copy hierarchy · Premium crimson field</p>
+          </div>
+        </div>
+        <div class="pack-card">
+          <img src="assets/promo-teal.jpg" alt="OTP teal promotional graphic">
+          <div class="pack-card-body">
+            <h3>BUSINESS CLASS TEAL</h3>
+            <p style="font-size:0.85rem;color:var(--otp-silver);margin:0">Teal campaign · Matching device colorway · "Dual-Chamber Twist v6" product ID</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FREQUENT FLYER CLUB + QUIZ ═══ -->
+  <section id="ffc" class="ffc-section">
+    <div class="container">
+      <p class="section-label">OTP Miles Program</p>
+      <h2 class="section-title">FREQUENT FLYER CLUB</h2>
+      <p class="section-desc">Earn miles with every trip. Take the in-flight quiz to discover your flyer tier and unlock lounge perks.</p>
+      <div class="ffc-tiers">
+        <div class="tier-card">
+          <div class="tier-name" style="color:var(--otp-silver)">SILVER</div>
+          <p style="font-size:0.85rem;color:var(--otp-silver);margin:0.75rem 0">0–24 miles · Economy perks · Standard boarding</p>
+        </div>
+        <div class="tier-card gold-tier">
+          <div class="tier-name" style="color:var(--otp-gold)">GOLD</div>
+          <p style="font-size:0.85rem;color:var(--otp-silver);margin:0.75rem 0">25–44 miles · Priority boarding · Route previews</p>
+        </div>
+        <div class="tier-card">
+          <div class="tier-name" style="color:var(--otp-teal)">PLATINUM</div>
+          <p style="font-size:0.85rem;color:var(--otp-silver);margin:0.75rem 0">45+ miles · Captain's lounge · Early flavor drops</p>
+        </div>
+      </div>
+      <div id="quiz-box" class="quiz-box"></div>
+    </div>
+  </section>
+
+  <!-- ═══ SEAT MAP SHOP ═══ -->
+  <section id="shop">
+    <div class="container" style="text-align:center">
+      <p class="section-label">Duty Free Shop</p>
+      <h2 class="section-title">SELECT YOUR SEAT</h2>
+      <p class="section-desc" style="margin:0 auto 2rem">Pick an available seat on the manifest, then reserve your Twist v6 or collector packaging below.</p>
+      <div class="seat-legend">
+        <span><span class="legend-dot" style="background:var(--otp-teal)"></span>Available</span>
+        <span><span class="legend-dot" style="background:var(--otp-gold)"></span>Selected</span>
+        <span><span class="legend-dot" style="background:var(--otp-red);opacity:0.5"></span>Occupied</span>
+      </div>
+      <div id="seat-map" class="seat-map"></div>
+      <div id="shop-products" class="shop-products"></div>
+    </div>
+  </section>
+
+  <!-- ═══ FLIGHT STATUS TRACKER ═══ -->
+  <section id="tracker" class="tracker">
+    <div class="container" style="text-align:center">
+      <p class="section-label">Arrivals &amp; Departures</p>
+      <h2 class="section-title">FLIGHT STATUS</h2>
+      <p class="section-desc" style="margin:0 auto 2rem">Track your order like a live departure board. Enter your confirmation number below.</p>
+      <div class="flight-board">
+        <div class="flight-row header">
+          <span>FLT</span>
+          <span>DESTINATION</span>
+          <span>STATUS</span>
+          <span>GATE</span>
+        </div>
+        <div id="flight-board-body">
+          <div class="flight-row">
+            <span>OTP</span>
+            <span>Enter order ID below</span>
+            <span class="status-on-time">READY</span>
+            <span>—</span>
+          </div>
+        </div>
+      </div>
+      <form id="tracker-form" class="tracker-form">
+        <input type="text" id="order-id" placeholder="Order Confirmation # (e.g. OTP-VD6-2401)" aria-label="Order ID">
+        <button type="submit" class="btn btn-teal">Track Flight</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══ SAFETY BRIEF (COMPLIANCE) ═══ -->
+  <section id="safety" class="safety-brief">
+    <div class="container">
+      <p class="section-label">Pre-Flight Safety Briefing</p>
+      <h2 class="section-title">SAFETY BRIEF</h2>
+      <p class="section-desc">Before we taxi, mandatory passenger information. Please listen carefully — your elevated experience depends on it.</p>
+      <div class="safety-grid">
+        <div class="safety-card">
+          <img src="assets/warning-ca.jpg" alt="California Cannabis Warning" class="warning-badge">
+          <h4>Age Requirement — 21+</h4>
+          <p>For use only by adults 21 years of age and older. OTP Airways International Terminal is a restricted destination. Keep out of reach of children and animals.</p>
+        </div>
+        <div class="safety-card">
+          <h4>Government Warning</h4>
+          <p>This product contains cannabis, a Schedule I controlled substance. Use while pregnant or breastfeeding may be harmful and affect your child. Driving or operating heavy machinery under the influence of cannabis is illegal. May cause drowsiness.</p>
+        </div>
+        <div class="safety-card">
+          <h4>Product Specifications</h4>
+          <p>Ingredients: Premium Live Resin. Net Wt. 2G (0.07 oz). Dual-Chamber Twist v6. Batch #: OTP-VD6-2401. Store at room temperature. Do not fly internationally with cannabis products.</p>
+        </div>
+        <div class="safety-card">
+          <h4>Responsible Flight Protocol</h4>
+          <p>Start low, go slow. Know your tolerance. Never share with minors. Dispose of devices responsibly. This product has not been evaluated by the FDA. Not intended to diagnose, treat, cure, or prevent any disease.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo-over-the-pond.jpg" alt="OTP" class="footer-logo">
+        <p style="font-family:var(--font-script);font-size:1.5rem;color:var(--otp-gold);margin:0">Life's a Trip. Fly higher.</p>
+        <p style="font-size:0.85rem;color:var(--otp-silver);margin-top:0.5rem">Premium Live Resin Vape · Over The Pond</p>
+      </div>
+      <div>
+        <h4 style="font-size:0.7rem;letter-spacing:0.15em;color:var(--otp-gold);margin:0 0 1rem">TERMINAL</h4>
+        <p style="font-size:0.85rem;color:var(--otp-silver);line-height:2;margin:0">
+          <a href="#routes" style="color:inherit;text-decoration:none">Route Map</a><br>
+          <a href="#shop" style="color:inherit;text-decoration:none">Duty Free</a><br>
+          <a href="#ffc" style="color:inherit;text-decoration:none">Frequent Flyer</a><br>
+          <a href="#tracker" style="color:inherit;text-decoration:none">Flight Status</a>
+        </p>
+      </div>
+      <div>
+        <h4 style="font-size:0.7rem;letter-spacing:0.15em;color:var(--otp-gold);margin:0 0 1rem">COMPLIANCE</h4>
+        <p style="font-size:0.85rem;color:var(--otp-silver);line-height:2;margin:0">
+          <a href="#safety" style="color:inherit;text-decoration:none">Safety Brief</a><br>
+          Privacy Policy<br>
+          Terms of Service<br>
+          CA Prop 65
+        </p>
+      </div>
+    </div>
+    <div class="footer-legal">
+      © 2026 OTP (Over The Pond). All rights reserved. Cannabis products — licensed retailers only. Must be 21+ to purchase. Keep out of reach of children. This website is for informational purposes and does not constitute medical advice.
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>gsap.registerPlugin(ScrollTrigger);</script>
+  <script src="js/main.js"></script>
+</body>
+</html>
