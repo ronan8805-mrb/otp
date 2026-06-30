@@ -283,13 +283,18 @@ function initConfigurator() {
     device.style.transform = `rotateY(${state.rotation}deg)`;
   });
 
-  device.addEventListener('touchstart', (e) => { dragging = true; startX = e.touches[0].clientX; startRot = state.rotation; });
+  device.addEventListener('touchstart', (e) => {
+    dragging = true;
+    startX = e.touches[0].clientX;
+    startRot = state.rotation;
+  }, { passive: true });
   document.addEventListener('touchend', () => { dragging = false; });
   document.addEventListener('touchmove', (e) => {
     if (!dragging) return;
+    e.preventDefault();
     state.rotation = startRot + (e.touches[0].clientX - startX) * 0.5;
     device.style.transform = `rotateY(${state.rotation}deg)`;
-  });
+  }, { passive: false });
 
   twistSlider?.addEventListener('input', (e) => {
     state.twistAngle = parseInt(e.target.value);
@@ -511,21 +516,45 @@ function simulateTracking(orderId) {
 // ── Nav ──
 function initNav() {
   const toggle = document.getElementById('nav-toggle');
-  const links = document.querySelector('.nav-links');
-  toggle?.addEventListener('click', () => links?.classList.toggle('open'));
-
+  const links = document.getElementById('nav-links');
+  const overlay = document.getElementById('nav-overlay');
+  const allNavLinks = document.querySelectorAll('.nav-links a, .mob-nav-item');
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
 
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 200) current = s.id;
-    });
-    navLinks.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
+  function setNavOpen(open) {
+    links?.classList.toggle('open', open);
+    overlay?.classList.toggle('visible', open);
+    document.body.classList.toggle('nav-open', open);
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      toggle.textContent = open ? '✕' : '☰';
+    }
+  }
+
+  toggle?.addEventListener('click', () => setNavOpen(!links?.classList.contains('open')));
+  overlay?.addEventListener('click', () => setNavOpen(false));
+
+  allNavLinks.forEach(a => {
+    a.addEventListener('click', () => {
+      setNavOpen(false);
     });
   });
+
+  function updateActiveNav() {
+    const offset = window.innerWidth <= 900 ? 120 : 200;
+    let current = 'hero';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - offset) current = s.id;
+    });
+    allNavLinks.forEach(a => {
+      const href = a.getAttribute('href')?.replace('#', '');
+      a.classList.toggle('active', href === current);
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
 }
 
 // ── Section reveals ──

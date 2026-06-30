@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#00205B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>OTP Airways — International Terminal | Live Resin Vape</title>
   <meta name="description" content="Over The Pond — Premium Live Resin Vape. Life's a Trip. Board OTP Airways for the Dual-Chamber Twist v6.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,11 +65,12 @@
   </div>
 
   <!-- ═══ TERMINAL NAV ═══ -->
-  <nav class="terminal-nav">
-    <a href="#" class="logo">
+  <div id="nav-overlay" class="nav-overlay" aria-hidden="true"></div>
+  <nav class="terminal-nav" id="terminal-nav">
+    <a href="#hero" class="logo">
       <img src="assets/logo-over-the-pond.jpg" alt="OTP — Over The Pond">
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="#hero">Departures</a></li>
       <li><a href="#routes">Route Map</a></li>
       <li><a href="#configurator">Hangar</a></li>
@@ -78,7 +81,16 @@
       <li><a href="#safety">Safety Brief</a></li>
     </ul>
     <span class="nav-gate">Gate A1 · OTP International</span>
-    <button id="nav-toggle" class="nav-mobile-toggle" aria-label="Menu">☰</button>
+    <button id="nav-toggle" class="nav-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+  </nav>
+
+  <!-- Mobile bottom nav -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Quick navigation">
+    <a href="#hero" class="mob-nav-item" data-section="hero"><span class="mob-nav-icon">🛫</span><span>Depart</span></a>
+    <a href="#routes" class="mob-nav-item" data-section="routes"><span class="mob-nav-icon">🌍</span><span>Routes</span></a>
+    <a href="#configurator" class="mob-nav-item" data-section="configurator"><span class="mob-nav-icon">🔧</span><span>Hangar</span></a>
+    <a href="#shop" class="mob-nav-item" data-section="shop"><span class="mob-nav-icon">🛍️</span><span>Shop</span></a>
+    <a href="#ffc" class="mob-nav-item" data-section="ffc"><span class="mob-nav-icon">🎫</span><span>Flyer</span></a>
   </nav>
 
   <!-- ═══ HERO: TAKEOFF WINDOW ═══ -->
