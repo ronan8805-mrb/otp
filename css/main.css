@@ -157,6 +157,17 @@ img, video { max-width: 100%; height: auto; }
   align-items: center;
 }
 
+.pass-brand {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+}
+
+.pass-type {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+
 .pass-stripe {
   height: 6px;
   background: linear-gradient(90deg, var(--otp-red) 33%, var(--otp-navy) 33%, var(--otp-navy) 66%, var(--otp-red) 66%);
@@ -169,10 +180,53 @@ img, video { max-width: 100%; height: auto; }
   gap: 1rem;
 }
 
+.pass-col-right { text-align: right; }
+
+.pass-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: #888;
+  margin: 0;
+}
+
+.pass-label:not(:first-child) { margin-top: 0.75rem; }
+
+.pass-value {
+  font-weight: 700;
+  margin: 0.2rem 0 0;
+  color: var(--otp-navy);
+}
+
+.pass-value-name {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.pass-value-seat {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--otp-red);
+  margin-bottom: 0.5rem;
+}
+
+.pass-value-class { color: var(--otp-gold); }
+
 .pass-barcode {
   height: 60px;
   background: repeating-linear-gradient(90deg, var(--otp-navy) 0 2px, transparent 2px 5px);
-  margin-top: 1rem;
+}
+
+.pass-footer {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.pass-tagline {
+  font-family: var(--font-script);
+  font-size: 1.3rem;
+  color: var(--otp-red);
+  margin: 0 0 1rem;
 }
 
 /* ── Buttons ── */
@@ -1302,19 +1356,76 @@ section {
 
   .passport-card { padding: 1.5rem 1.25rem; }
 
-  .pass-body {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    padding: 1.25rem;
+  .age-gate:has(.boarding-pass.visible) {
+    align-items: center;
+    padding: max(0.5rem, env(safe-area-inset-top)) 0.75rem max(0.5rem, env(safe-area-inset-bottom));
+    overflow-y: auto;
   }
 
-  .pass-body > div:last-child { text-align: left; }
+  .boarding-pass.visible {
+    width: min(480px, 94vw);
+    max-height: calc(100dvh - 1rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+  }
 
   .pass-header {
-    flex-direction: column;
-    gap: 0.25rem;
-    text-align: center;
-    padding: 0.85rem 1rem;
+    padding: 0.5rem 1rem;
+    flex-shrink: 0;
+  }
+
+  .pass-brand { font-size: 1rem; }
+
+  .pass-type { font-size: 0.6rem; }
+
+  .pass-stripe { height: 4px; flex-shrink: 0; }
+
+  .pass-body {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 0.75rem;
+    padding: 0.65rem 1rem;
+    flex-shrink: 0;
+  }
+
+  .pass-label { font-size: 0.55rem; }
+
+  .pass-label:not(:first-child) { margin-top: 0.35rem; }
+
+  .pass-value-name {
+    font-size: 1rem;
+    margin-bottom: 0;
+    line-height: 1.1;
+    word-break: break-word;
+  }
+
+  .pass-value-seat {
+    font-size: 1.6rem;
+    margin-bottom: 0;
+    line-height: 1;
+  }
+
+  .pass-value { font-size: 0.8rem; }
+
+  .pass-barcode {
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .pass-footer {
+    padding: 0.65rem 1rem 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .pass-tagline {
+    font-size: 1rem;
+    margin: 0 0 0.5rem;
+  }
+
+  #enter-terminal {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    font-size: 0.75rem;
   }
 
   .safety-grid { grid-template-columns: 1fr; }
@@ -1352,17 +1463,13 @@ section {
     font-size: 0.5rem;
   }
 
-  .age-gate {
+  .age-gate:not(:has(.boarding-pass.visible)) {
     padding: 1rem;
     align-items: flex-start;
     padding-top: max(2rem, env(safe-area-inset-top));
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
-
-  .boarding-pass { margin-bottom: 2rem; }
-
-  #enter-terminal { width: 100%; }
 
   .product-card img { height: 180px; }
 

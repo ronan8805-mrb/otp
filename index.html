@@ -34,31 +34,31 @@
 
     <div id="boarding-pass" class="boarding-pass">
       <div class="pass-header">
-        <span style="font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.1em">OTP AIRWAYS</span>
-        <span style="font-size:0.7rem;letter-spacing:0.15em">BOARDING PASS</span>
+        <span class="pass-brand">OTP AIRWAYS</span>
+        <span class="pass-type">BOARDING PASS</span>
       </div>
       <div class="pass-stripe"></div>
       <div class="pass-body">
-        <div>
-          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:0">PASSENGER</p>
-          <p id="pass-name" style="font-family:var(--font-display);font-size:1.8rem;margin:0.25rem 0 1rem">GUEST FLYER</p>
-          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:0">FLIGHT</p>
-          <p id="pass-flight" style="font-weight:700;margin:0.25rem 0">OTP420</p>
-          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:1rem 0 0">GATE</p>
-          <p id="pass-gate" style="font-weight:700;margin:0.25rem 0">A7</p>
+        <div class="pass-col">
+          <p class="pass-label">PASSENGER</p>
+          <p id="pass-name" class="pass-value pass-value-name">GUEST FLYER</p>
+          <p class="pass-label">FLIGHT</p>
+          <p id="pass-flight" class="pass-value">OTP420</p>
+          <p class="pass-label">GATE</p>
+          <p id="pass-gate" class="pass-value">A7</p>
         </div>
-        <div style="text-align:right">
-          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:0">SEAT</p>
-          <p id="pass-seat" style="font-family:var(--font-display);font-size:2.5rem;color:var(--otp-red);margin:0.25rem 0 1rem">4A</p>
-          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:0">DATE</p>
-          <p id="pass-date" style="font-weight:700;margin:0.25rem 0">JUN 30, 2026</p>
-          <p style="font-size:0.65rem;letter-spacing:0.15em;color:#888;margin:1rem 0 0">CLASS</p>
-          <p style="font-weight:700;color:var(--otp-gold);margin:0.25rem 0">FIRST CLASS</p>
+        <div class="pass-col pass-col-right">
+          <p class="pass-label">SEAT</p>
+          <p id="pass-seat" class="pass-value pass-value-seat">4A</p>
+          <p class="pass-label">DATE</p>
+          <p id="pass-date" class="pass-value">JUN 30, 2026</p>
+          <p class="pass-label">CLASS</p>
+          <p class="pass-value pass-value-class">FIRST CLASS</p>
         </div>
       </div>
       <div class="pass-barcode"></div>
-      <div style="padding:1.5rem;text-align:center">
-        <p style="font-family:var(--font-script);font-size:1.3rem;color:var(--otp-red);margin:0 0 1rem">Prepare for Takeoff</p>
+      <div class="pass-footer">
+        <p class="pass-tagline">Prepare for Takeoff</p>
         <button id="enter-terminal" class="btn btn-red">Enter International Terminal →</button>
       </div>
     </div>
