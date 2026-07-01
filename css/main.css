@@ -307,7 +307,7 @@ img, video { max-width: 100%; height: auto; }
 }
 
 .terminal-nav .logo img {
-  height: 48px;
+  height: 72px;
   width: auto;
   display: block;
 }
@@ -1170,9 +1170,9 @@ section {
 }
 
 .footer-logo {
-  height: 56px;
+  height: 96px;
   width: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   display: block;
 }
 
@@ -1237,7 +1237,7 @@ section {
 
   .nav-mobile-toggle { display: flex; align-items: center; justify-content: center; }
 
-  .terminal-nav .logo img { height: 40px; }
+  .terminal-nav .logo img { height: 56px; }
 
   .mobile-bottom-nav { display: flex; }
 
@@ -1519,7 +1519,7 @@ section {
 
   .footer { padding: 2rem 1.25rem calc(5rem + env(safe-area-inset-bottom)); }
 
-  .footer-logo { height: 48px; }
+  .footer-logo { height: 72px; }
 }
 
 /* ── Responsive: Landscape phones ── */
