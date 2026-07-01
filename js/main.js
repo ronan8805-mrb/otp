@@ -41,10 +41,9 @@ const QUIZ = [
 ];
 
 const PRODUCTS = [
-  { id: 'twist-red', name: 'Twist v6 — Crimson Route', price: 45, img: 'assets/device-red-twist.jpg', seat: '1A' },
-  { id: 'twist-teal', name: 'Twist v6 — Atlantic Route', price: 45, img: 'assets/device-teal-twist.jpg', seat: '2A' },
-  { id: 'pack-white', name: 'Collector Outer Box', price: 12, img: 'assets/packaging-white-box.jpg', seat: '3B' },
-  { id: 'pack-teal', name: 'Teal Limited Edition', price: 48, img: 'assets/packaging-teal-box.jpg', seat: '4C' }
+  { id: 'twist-red', name: 'Twist v6 — First Class', price: 45, img: 'assets/device-red-twist.jpg', seat: '1A' },
+  { id: 'twist-teal', name: 'Twist v6 — Business Class', price: 45, img: 'assets/device-blue-twist.jpg', seat: '2A' },
+  { id: 'pack-white', name: 'OTP Mastercase', priceLabel: 'CONTACT US', contact: true, img: 'assets/packaging-white-box.jpg', seat: '3B' }
 ];
 
 let state = {
@@ -447,9 +446,9 @@ function initShop() {
       <img src="${p.img}" alt="${p.name}" loading="lazy">
       <div class="product-info">
         <h3 style="font-family:var(--font-display);letter-spacing:0.08em;margin:0 0 0.5rem">${p.name}</h3>
-        <div class="product-price">$${p.price}</div>
-        <p style="font-size:0.75rem;color:var(--otp-silver);margin:0.5rem 0">Seat ${p.seat} · Live Resin</p>
-        <button class="btn btn-red" style="width:100%;margin-top:1rem;padding:0.7rem" onclick="addToCart('${p.id}')">Reserve Seat</button>
+        <div class="product-price">${p.priceLabel || `$${p.price}`}</div>
+        <p style="font-size:0.75rem;color:var(--otp-silver);margin:0.5rem 0">Seat ${p.seat}${p.contact ? '' : ' · Live Resin'}</p>
+        <button class="btn ${p.contact ? 'btn-gold' : 'btn-red'}" style="width:100%;margin-top:1rem;padding:0.7rem" onclick="${p.contact ? `contactUs('${p.id}')` : `addToCart('${p.id}')`}">${p.contact ? 'Contact Us' : 'Reserve Seat'}</button>
       </div>
     </div>
   `).join('');
@@ -468,6 +467,11 @@ function selectSeat(id, el) {
 function addToCart(id) {
   const product = PRODUCTS.find(p => p.id === id);
   alert(`✈️ ${product.name} reserved${state.selectedSeat ? ` in Seat ${state.selectedSeat}` : ''}!\n\nProceed to checkout via Shopify integration.`);
+}
+
+function contactUs(id) {
+  const product = PRODUCTS.find(p => p.id === id);
+  alert(`✈️ ${product.name}\n\nFor wholesale and mastercase inquiries, contact us at sales@otp-airways.com`);
 }
 
 // ── Flight Tracker ──
