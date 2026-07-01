@@ -114,8 +114,7 @@ function calcAge(dob) {
 function initHeroAnimations() {
   if (typeof gsap === 'undefined') return;
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  tl.from('.hero-device', { y: 80, opacity: 0, duration: 1.2 })
-    .from('.hero-tagline', { opacity: 0, y: 20, duration: 0.8 }, '-=0.6')
+  tl.from('.hero-tagline', { opacity: 0, y: 20, duration: 0.8 })
     .from('.hero-headline', { opacity: 0, scale: 0.8, duration: 1 }, '-=0.4')
     .from('.hero-sub', { opacity: 0, duration: 0.6 }, '-=0.5')
     .from('.hero-ctas .btn', { opacity: 0, y: 20, stagger: 0.15, duration: 0.5 }, '-=0.3');
@@ -130,8 +129,6 @@ function initHeroAnimations() {
     const scrolled = window.scrollY;
     const hero = document.querySelector('.hero-window');
     if (hero) hero.style.transform = `translateY(${scrolled * 0.4}px)`;
-    const device = document.querySelector('.hero-device');
-    if (device) device.style.transform = `translateY(${-scrolled * 0.15}px) rotate(${Math.sin(scrolled * 0.01) * 5}deg)`;
   });
 }
 
