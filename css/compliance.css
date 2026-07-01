@@ -1,0 +1,273 @@
+/* OTP Airways — Compliance Pages */
+
+.compliance-page {
+  padding-top: calc(88px + env(safe-area-inset-top));
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--otp-navy-deep) 0%, var(--otp-black) 35%);
+}
+
+.compliance-hero {
+  text-align: center;
+  padding: 3rem 1.5rem 2.5rem;
+  background:
+    linear-gradient(135deg, rgba(200, 16, 46, 0.15), transparent 50%),
+    linear-gradient(180deg, var(--otp-navy) 0%, var(--otp-navy-deep) 100%);
+  border-bottom: 4px solid var(--otp-gold);
+  position: relative;
+  overflow: hidden;
+}
+
+.compliance-hero::before {
+  content: '✈';
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 6rem;
+  opacity: 0.06;
+}
+
+.compliance-hero .section-label {
+  margin-bottom: 0.75rem;
+}
+
+.compliance-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  letter-spacing: 0.08em;
+  margin: 0 0 0.75rem;
+  color: var(--otp-white);
+}
+
+.compliance-flight {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--otp-teal);
+  margin: 0;
+}
+
+.compliance-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  color: var(--otp-gold);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.compliance-back:hover { color: var(--otp-teal); }
+
+.compliance-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2.5rem;
+  padding: 3rem 1.5rem 4rem;
+  align-items: start;
+}
+
+.compliance-sidebar {
+  position: sticky;
+  top: calc(100px + env(safe-area-inset-top));
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.compliance-sidebar h3 {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--otp-gold);
+  margin: 0 0 1rem;
+  font-weight: 700;
+}
+
+.compliance-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.compliance-nav a {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--otp-silver);
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.compliance-nav a:hover {
+  color: var(--otp-white);
+  background: rgba(64, 181, 181, 0.12);
+  border-color: rgba(64, 181, 181, 0.3);
+}
+
+.compliance-nav a.active {
+  color: var(--otp-navy);
+  background: var(--otp-gold);
+  border-color: var(--otp-gold);
+}
+
+.compliance-content {
+  max-width: 760px;
+}
+
+.compliance-ticket {
+  background: var(--otp-cream);
+  color: var(--otp-navy);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+}
+
+.compliance-ticket-header {
+  background: var(--otp-red);
+  color: white;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.compliance-ticket-header strong {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.compliance-ticket-stripe {
+  height: 5px;
+  background: linear-gradient(90deg, var(--otp-red) 33%, var(--otp-navy) 33%, var(--otp-navy) 66%, var(--otp-red) 66%);
+}
+
+.compliance-ticket-body {
+  padding: 2rem 1.75rem;
+}
+
+.compliance-ticket-body h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  margin: 0 0 1rem;
+  color: var(--otp-navy);
+}
+
+.compliance-ticket-body h3 {
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--otp-red);
+  margin: 1.75rem 0 0.75rem;
+}
+
+.compliance-ticket-body p,
+.compliance-ticket-body li {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #334155;
+  margin: 0 0 1rem;
+}
+
+.compliance-ticket-body ul,
+.compliance-ticket-body ol {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.compliance-ticket-body li { margin-bottom: 0.5rem; }
+
+.compliance-warning-box {
+  background: rgba(200, 16, 46, 0.08);
+  border-left: 4px solid var(--otp-red);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.compliance-warning-box p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--otp-red-deep);
+}
+
+.compliance-stamp {
+  display: inline-block;
+  border: 2px dashed var(--otp-navy);
+  border-radius: 50%;
+  padding: 0.5rem 1rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--otp-navy);
+  margin-top: 1rem;
+  opacity: 0.6;
+}
+
+.compliance-nav-header .nav-links { display: none; }
+.compliance-nav-header .nav-gate { display: none; }
+
+.compliance-nav-header .btn-outline {
+  border-color: var(--otp-navy);
+  color: var(--otp-navy);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .compliance-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2rem 1.25rem 5rem;
+  }
+
+  .compliance-sidebar {
+    position: static;
+  }
+
+  .compliance-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .compliance-nav a {
+    flex: 1 1 calc(50% - 0.25rem);
+    text-align: center;
+    padding: 0.65rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .compliance-ticket-body { padding: 1.5rem 1.25rem; }
+
+  .compliance-hero { padding: 2.5rem 1.25rem 2rem; }
+
+  .compliance-nav-header {
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .compliance-nav-header .btn-outline {
+    font-size: 0.6rem !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+}

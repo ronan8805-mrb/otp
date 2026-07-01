@@ -1103,6 +1103,20 @@ section {
   margin: 0;
 }
 
+.safety-card-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--otp-teal);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.safety-card-link:hover { color: var(--otp-gold); }
+
 .warning-badge {
   width: 48px;
   height: auto;
