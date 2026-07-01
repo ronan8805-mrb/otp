@@ -121,9 +121,8 @@ function initHeroAnimations() {
 
   gsap.to('.hero-tagline', { opacity: 1, duration: 0.01 });
 
-  gsap.to('.hero-cloud-1', { x: 100, duration: 20, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-  gsap.to('.hero-cloud-2', { x: -80, duration: 25, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-  gsap.to('.hero-cloud-3', { x: 60, duration: 18, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+  const heroVideo = document.querySelector('.hero-video');
+  heroVideo?.play().catch(() => {});
 
   window.addEventListener('scroll', () => {
     const scrolled = window.scrollY;

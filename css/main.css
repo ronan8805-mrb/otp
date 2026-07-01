@@ -420,19 +420,30 @@ img, video { max-width: 100%; height: auto; }
 .hero-window {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, #87CEEB 0%, #4A90C2 40%, #1a3a5c 100%);
+  overflow: hidden;
+  background: var(--otp-navy-deep);
 }
 
-.hero-cloud {
+.hero-video {
   position: absolute;
-  background: rgba(255,255,255,0.85);
-  border-radius: 50%;
-  filter: blur(2px);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-.hero-cloud-1 { width: 200px; height: 60px; top: 15%; left: 10%; }
-.hero-cloud-2 { width: 300px; height: 80px; top: 25%; right: 5%; }
-.hero-cloud-3 { width: 180px; height: 50px; top: 40%; left: 30%; }
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 32, 91, 0.35) 0%,
+    rgba(0, 0, 0, 0.25) 45%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
+}
 
 .hero-frame {
   position: absolute;
