@@ -88,12 +88,11 @@ img, video { max-width: 100%; height: auto; }
   50% { top: 90%; opacity: 1; }
 }
 
-.passport-chip {
-  width: 48px;
-  height: 36px;
-  background: linear-gradient(135deg, var(--otp-gold), #8B6914);
-  border-radius: 6px;
-  margin-bottom: 1rem;
+.passport-logo {
+  display: block;
+  width: min(200px, 70%);
+  height: auto;
+  margin: 0 auto 1.25rem;
 }
 
 .passport-title {
