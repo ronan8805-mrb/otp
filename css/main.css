@@ -1181,7 +1181,7 @@ section {
 
 @media (max-width: 900px) {
   .footer {
-    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
   }
 }
 
@@ -1263,7 +1263,7 @@ section {
 
   .terminal-nav .logo img { height: 56px; }
 
-  .mobile-bottom-nav { display: flex; }
+  .mobile-bottom-nav { display: none !important; }
 
   section {
     padding: 4rem 1.25rem;
@@ -1271,7 +1271,7 @@ section {
   }
 
   section:last-of-type {
-    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+    padding-bottom: max(4rem, env(safe-area-inset-bottom));
   }
 
   .hero-content {
@@ -1286,7 +1286,7 @@ section {
   .hero-frame::after { height: 40px; bottom: -40px; }
 
   .hero-ticker {
-    bottom: calc(60px + env(safe-area-inset-bottom));
+    bottom: 0;
   }
 
   .hero-device {
@@ -1525,7 +1525,7 @@ section {
     padding: 0 1rem;
   }
 
-  .hero-ticker { bottom: calc(56px + env(safe-area-inset-bottom)); }
+  .hero-ticker { bottom: 0; }
 
   .mob-nav-item span:not(.mob-nav-icon) {
     font-size: 0.5rem;
@@ -1541,7 +1541,7 @@ section {
 
   .product-card img { height: 180px; }
 
-  .footer { padding: 2rem 1.25rem calc(5rem + env(safe-area-inset-bottom)); }
+  .footer { padding: 2rem 1.25rem max(2rem, env(safe-area-inset-bottom)); }
 
   .footer-logo { height: 72px; }
 }
