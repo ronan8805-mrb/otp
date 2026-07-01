@@ -121,8 +121,7 @@ function initHeroAnimations() {
 
   gsap.to('.hero-tagline', { opacity: 1, duration: 0.01 });
 
-  const heroVideo = document.querySelector('.hero-video');
-  heroVideo?.play().catch(() => {});
+  document.querySelectorAll('.hero-video').forEach(v => v.play().catch(() => {}));
 
   window.addEventListener('scroll', () => {
     const scrolled = window.scrollY;

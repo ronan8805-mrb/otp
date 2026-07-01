@@ -433,6 +433,10 @@ img, video { max-width: 100%; height: auto; }
   object-position: center;
 }
 
+.hero-video-mobile {
+  display: none;
+}
+
 .hero-video-overlay {
   position: absolute;
   inset: 0;
@@ -1264,6 +1268,9 @@ section {
   .terminal-nav .logo img { height: 56px; }
 
   .mobile-bottom-nav { display: none !important; }
+
+  .hero-video-desktop { display: none; }
+  .hero-video-mobile { display: block; }
 
   section {
     padding: 4rem 1.25rem;
