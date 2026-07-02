@@ -57,7 +57,9 @@ let state = {
   quizStep: 0,
   quizScore: 0,
   selectedSeat: null,
-  journeyPhase: 0
+  journeyPhase: 0,
+  cart: [],
+  lastOrder: null
 };
 
 // ── Age Gate ──
@@ -464,15 +466,300 @@ function selectSeat(id, el) {
   }
 }
 
+// ── Cart & Checkout ──
+function loadCart() {
+  try {
+    const saved = localStorage.getItem('otp-cart');
+    if (saved) state.cart = JSON.parse(saved);
+  } catch { state.cart = []; }
+}
+
+function saveCart() {
+  localStorage.setItem('otp-cart', JSON.stringify(state.cart));
+}
+
+function formatMoney(n) {
+  return `$${n.toFixed(2)}`;
+}
+
+function getCartSubtotal() {
+  return state.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+}
+
+function getCartTax() {
+  return Math.round(getCartSubtotal() * 0.0875 * 100) / 100;
+}
+
+function getCartTotal() {
+  return getCartSubtotal() + getCartTax();
+}
+
+function generateTrackingNumber() {
+  const prefix = 'OTP' + Math.floor(Math.random() * 90 + 10);
+  const suffix = Math.floor(Math.random() * 90000 + 10000);
+  return `${prefix}-${suffix}`;
+}
+
+function generateFlightNumber() {
+  return 'OTP' + Math.floor(Math.random() * 900 + 100);
+}
+
+function showToast(msg) {
+  let toast = document.getElementById('cart-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'cart-toast';
+    toast.className = 'cart-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.classList.add('visible');
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(() => toast.classList.remove('visible'), 2800);
+}
+
+function updateCartUI() {
+  const countEl = document.getElementById('cart-count');
+  const itemsEl = document.getElementById('cart-items');
+  const checkoutBtn = document.getElementById('cart-checkout-btn');
+  const totalItems = state.cart.reduce((s, i) => s + i.qty, 0);
+
+  if (countEl) {
+    countEl.textContent = totalItems;
+    countEl.style.display = totalItems > 0 ? 'inline-flex' : 'none';
+  }
+
+  const subtotal = getCartSubtotal();
+  const tax = getCartTax();
+  const total = getCartTotal();
+
+  ['cart-subtotal', 'checkout-subtotal', 'receipt-subtotal'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = formatMoney(subtotal);
+  });
+  ['cart-tax', 'checkout-tax', 'receipt-tax'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = formatMoney(tax);
+  });
+  ['cart-total', 'checkout-total', 'receipt-total'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = formatMoney(total);
+  });
+
+  if (checkoutBtn) checkoutBtn.disabled = state.cart.length === 0;
+
+  if (!itemsEl) return;
+
+  if (state.cart.length === 0) {
+    itemsEl.innerHTML = '<p class="cart-empty">Your manifest is empty.<br>Reserve a seat to begin your flight.</p>';
+    return;
+  }
+
+  itemsEl.innerHTML = state.cart.map(item => `
+    <div class="cart-item">
+      <img src="${item.img}" alt="${item.name}">
+      <div>
+        <p class="cart-item-name">${item.name}</p>
+        <p class="cart-item-seat">Seat ${item.seat} · Live Resin</p>
+        <p class="cart-item-price">${formatMoney(item.price * item.qty)}</p>
+        <div class="cart-item-qty">
+          <button class="cart-qty-btn" onclick="changeCartQty('${item.cartId}', -1)" aria-label="Decrease">−</button>
+          <span>${item.qty}</span>
+          <button class="cart-qty-btn" onclick="changeCartQty('${item.cartId}', 1)" aria-label="Increase">+</button>
+        </div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart('${item.cartId}')" aria-label="Remove">✕</button>
+    </div>
+  `).join('');
+
+  renderCheckoutSummary();
+}
+
+function renderCheckoutSummary() {
+  const el = document.getElementById('checkout-summary-items');
+  if (!el) return;
+  el.innerHTML = state.cart.map(item => `
+    <div class="checkout-summary-item">
+      <img src="${item.img}" alt="">
+      <div>
+        <h4>${item.name}</h4>
+        <p>Seat ${item.seat} · Qty ${item.qty}</p>
+        <p style="font-weight:700;color:var(--otp-red)">${formatMoney(item.price * item.qty)}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openCart() {
+  document.getElementById('cart-drawer')?.classList.add('open');
+  document.getElementById('cart-overlay')?.classList.add('visible');
+  document.body.classList.add('nav-open');
+}
+
+function closeCart() {
+  document.getElementById('cart-drawer')?.classList.remove('open');
+  document.getElementById('cart-overlay')?.classList.remove('visible');
+  if (!document.getElementById('nav-links')?.classList.contains('open')) {
+    document.body.classList.remove('nav-open');
+  }
+}
+
+function openCheckout() {
+  if (state.cart.length === 0) return;
+  closeCart();
+  document.getElementById('checkout-modal')?.classList.add('visible');
+  document.body.classList.add('nav-open');
+  renderCheckoutSummary();
+  updateCartUI();
+}
+
+function closeCheckout() {
+  document.getElementById('checkout-modal')?.classList.remove('visible');
+  if (!document.getElementById('cart-drawer')?.classList.contains('open')) {
+    document.body.classList.remove('nav-open');
+  }
+}
+
 function addToCart(id) {
   const product = PRODUCTS.find(p => p.id === id);
-  alert(`✈️ ${product.name} reserved${state.selectedSeat ? ` in Seat ${state.selectedSeat}` : ''}!\n\nProceed to checkout via Shopify integration.`);
+  if (!product || product.contact) return contactUs(id);
+  const seat = state.selectedSeat || product.seat;
+  const existing = state.cart.find(i => i.id === id && i.seat === seat);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    state.cart.push({
+      cartId: String(Date.now()) + Math.random().toString(36).slice(2, 6),
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      img: product.img,
+      seat,
+      qty: 1
+    });
+  }
+  saveCart();
+  updateCartUI();
+  openCart();
+  showToast(`✈ ${product.name} added to manifest`);
+}
+
+function addConfiguratorToCart() {
+  const id = state.deviceColor === 'teal' ? 'twist-teal' : 'twist-red';
+  addToCart(id);
+}
+
+function removeFromCart(cartId) {
+  state.cart = state.cart.filter(i => i.cartId !== cartId);
+  saveCart();
+  updateCartUI();
+}
+
+function changeCartQty(cartId, delta) {
+  const item = state.cart.find(i => i.cartId === cartId);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(cartId);
+  else { saveCart(); updateCartUI(); }
 }
 
 function contactUs(id) {
   const product = PRODUCTS.find(p => p.id === id);
   alert(`✈️ ${product.name}\n\nFor wholesale and mastercase inquiries, contact us at sales@otp-airways.com`);
 }
+
+function showReceipt(order) {
+  document.getElementById('receipt-tracking').textContent = order.trackingNumber;
+  document.getElementById('receipt-flight').textContent = order.flightNumber;
+  document.getElementById('receipt-date').textContent = order.date;
+  document.getElementById('receipt-passenger').textContent = order.passenger;
+  document.getElementById('receipt-email').textContent = order.email;
+  document.getElementById('receipt-payment').textContent = order.payment;
+
+  document.getElementById('receipt-line-items').innerHTML = order.items.map(item => `
+    <tr>
+      <td>${item.name}</td>
+      <td>${item.seat}</td>
+      <td>${item.qty}</td>
+      <td>${formatMoney(item.price * item.qty)}</td>
+    </tr>
+  `).join('');
+
+  document.getElementById('receipt-subtotal').textContent = formatMoney(order.subtotal);
+  document.getElementById('receipt-tax').textContent = formatMoney(order.tax);
+  document.getElementById('receipt-total').textContent = formatMoney(order.total);
+
+  document.getElementById('receipt-modal')?.classList.add('visible');
+  document.body.classList.add('nav-open');
+  state.lastOrder = order;
+}
+
+function closeReceipt() {
+  document.getElementById('receipt-modal')?.classList.remove('visible');
+  document.body.classList.remove('nav-open');
+}
+
+function completeCheckout(e) {
+  e.preventDefault();
+  if (state.cart.length === 0) return;
+
+  const name = document.getElementById('checkout-name').value.trim();
+  const email = document.getElementById('checkout-email').value.trim();
+  const card = document.getElementById('checkout-card').value.replace(/\s/g, '');
+  const last4 = card.slice(-4) || '4242';
+
+  const order = {
+    trackingNumber: generateTrackingNumber(),
+    flightNumber: generateFlightNumber(),
+    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase(),
+    passenger: name.toUpperCase(),
+    email,
+    payment: `VISA •••• ${last4}`,
+    items: state.cart.map(i => ({ ...i })),
+    subtotal: getCartSubtotal(),
+    tax: getCartTax(),
+    total: getCartTotal()
+  };
+
+  localStorage.setItem('otp-last-order', JSON.stringify(order));
+  localStorage.setItem('otp-track-id', order.trackingNumber);
+
+  state.cart = [];
+  saveCart();
+  updateCartUI();
+  closeCheckout();
+  showReceipt(order);
+}
+
+function initCart() {
+  loadCart();
+  updateCartUI();
+
+  document.getElementById('cart-toggle')?.addEventListener('click', openCart);
+  document.getElementById('cart-close')?.addEventListener('click', closeCart);
+  document.getElementById('cart-overlay')?.addEventListener('click', closeCart);
+  document.getElementById('cart-continue-btn')?.addEventListener('click', closeCart);
+  document.getElementById('cart-checkout-btn')?.addEventListener('click', openCheckout);
+  document.getElementById('checkout-close')?.addEventListener('click', closeCheckout);
+  document.getElementById('checkout-form')?.addEventListener('submit', completeCheckout);
+
+  document.getElementById('receipt-close-btn')?.addEventListener('click', closeReceipt);
+  document.getElementById('receipt-track-btn')?.addEventListener('click', () => {
+    closeReceipt();
+    const id = state.lastOrder?.trackingNumber || localStorage.getItem('otp-track-id');
+    if (id) {
+      document.getElementById('order-id').value = id;
+      document.getElementById('tracker')?.scrollIntoView({ behavior: 'smooth' });
+      simulateTracking(id);
+    }
+  });
+}
+
+window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
+window.changeCartQty = changeCartQty;
+window.addConfiguratorToCart = addConfiguratorToCart;
+window.contactUs = contactUs;
 
 // ── Flight Tracker ──
 function initTracker() {
@@ -575,6 +862,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initJourney();
   initQuiz();
   initShop();
+  initCart();
   initTracker();
   initNav();
   initScrollReveals();

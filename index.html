@@ -80,8 +80,128 @@
       <li><a href="#safety">Safety Brief</a></li>
     </ul>
     <span class="nav-gate">Gate A1 · OTP International</span>
+    <button id="cart-toggle" class="cart-toggle" aria-label="Open cart">
+      ✈ <span class="cart-label">Manifest</span>
+      <span id="cart-count" class="cart-count">0</span>
+    </button>
     <button id="nav-toggle" class="nav-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
   </nav>
+
+  <!-- ═══ CART DRAWER ═══ -->
+  <div id="cart-overlay" class="cart-overlay" aria-hidden="true"></div>
+  <aside id="cart-drawer" class="cart-drawer" aria-label="Shopping cart">
+    <div class="cart-drawer-header">
+      <h2>Flight Manifest</h2>
+      <button id="cart-close" class="cart-close" aria-label="Close cart">✕</button>
+    </div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-summary-row"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+      <div class="cart-summary-row"><span>Excise &amp; Fees</span><span id="cart-tax">$0.00</span></div>
+      <div class="cart-summary-row cart-total-row"><span>Total</span><span id="cart-total">$0.00</span></div>
+      <button id="cart-checkout-btn" class="btn btn-gold" style="width:100%;margin-top:1rem" disabled>Proceed to Checkout →</button>
+      <button id="cart-continue-btn" class="btn btn-outline" style="width:100%;margin-top:0.5rem">Continue Shopping</button>
+    </div>
+  </aside>
+
+  <!-- ═══ CHECKOUT ═══ -->
+  <div id="checkout-modal" class="checkout-modal">
+    <div class="checkout-container">
+      <button id="checkout-close" class="checkout-close" aria-label="Close checkout">✕</button>
+      <div class="checkout-grid">
+        <div class="checkout-form-wrap">
+          <p class="section-label">Final Boarding</p>
+          <h2 class="checkout-title">CHECKOUT</h2>
+          <p class="checkout-sub">Complete your passenger details to confirm your OTP flight reservation.</p>
+          <form id="checkout-form" class="checkout-form">
+            <h3 class="checkout-section-head">Passenger Information</h3>
+            <div class="checkout-field-row">
+              <input type="text" id="checkout-name" placeholder="Full Name" required autocomplete="name">
+              <input type="email" id="checkout-email" placeholder="Email Address" required autocomplete="email">
+            </div>
+            <input type="text" id="checkout-address" placeholder="Street Address" required autocomplete="street-address">
+            <div class="checkout-field-row three-col">
+              <input type="text" id="checkout-city" placeholder="City" required>
+              <input type="text" id="checkout-state" placeholder="State" required maxlength="2" style="text-transform:uppercase">
+              <input type="text" id="checkout-zip" placeholder="ZIP" required maxlength="10">
+            </div>
+            <h3 class="checkout-section-head">Payment (Demo)</h3>
+            <input type="text" id="checkout-card" placeholder="Card Number" required maxlength="19" value="4242 4242 4242 4242">
+            <div class="checkout-field-row">
+              <input type="text" id="checkout-expiry" placeholder="MM/YY" required maxlength="5" value="12/28">
+              <input type="text" id="checkout-cvv" placeholder="CVV" required maxlength="4" value="123">
+            </div>
+            <label class="checkout-checkbox">
+              <input type="checkbox" id="checkout-age" required checked>
+              <span>I confirm I am 21+ and agree to the <a href="safety-brief.html">Safety Brief</a></span>
+            </label>
+            <button type="submit" class="btn btn-red" style="width:100%;margin-top:1rem">Complete Flight Booking ✈</button>
+          </form>
+        </div>
+        <div class="checkout-summary-wrap">
+          <h3 class="checkout-section-head">Order Summary</h3>
+          <div id="checkout-summary-items" class="checkout-summary-items"></div>
+          <div class="checkout-summary-totals">
+            <div class="cart-summary-row"><span>Subtotal</span><span id="checkout-subtotal">$0.00</span></div>
+            <div class="cart-summary-row"><span>Excise &amp; Fees (8.75%)</span><span id="checkout-tax">$0.00</span></div>
+            <div class="cart-summary-row cart-total-row"><span>Total Due</span><span id="checkout-total">$0.00</span></div>
+          </div>
+          <p class="checkout-note">🔒 Demo checkout — no real charges processed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ RECEIPT / E-TICKET ═══ -->
+  <div id="receipt-modal" class="receipt-modal">
+    <div class="receipt-invoice">
+      <div class="receipt-header">
+        <div>
+          <span class="receipt-brand">OTP AIRWAYS</span>
+          <span class="receipt-type">E-TICKET RECEIPT</span>
+        </div>
+        <span class="receipt-status">✈ FLIGHT CONFIRMED</span>
+      </div>
+      <div class="pass-stripe"></div>
+      <div class="receipt-body">
+        <div class="receipt-meta-grid">
+          <div>
+            <p class="pass-label">CONFIRMATION #</p>
+            <p id="receipt-tracking" class="receipt-tracking">OTP83-83819</p>
+            <p class="pass-label">FLIGHT</p>
+            <p id="receipt-flight" class="pass-value">OTP247</p>
+            <p class="pass-label">DATE ISSUED</p>
+            <p id="receipt-date" class="pass-value">—</p>
+          </div>
+          <div class="pass-col-right">
+            <p class="pass-label">PASSENGER</p>
+            <p id="receipt-passenger" class="pass-value pass-value-name">—</p>
+            <p class="pass-label">EMAIL</p>
+            <p id="receipt-email" class="pass-value" style="font-size:0.8rem">—</p>
+            <p class="pass-label">PAYMENT</p>
+            <p id="receipt-payment" class="pass-value">—</p>
+          </div>
+        </div>
+        <table class="receipt-table">
+          <thead>
+            <tr><th>Item</th><th>Seat</th><th>Qty</th><th>Price</th></tr>
+          </thead>
+          <tbody id="receipt-line-items"></tbody>
+        </table>
+        <div class="receipt-totals">
+          <div class="receipt-total-line"><span>Subtotal</span><span id="receipt-subtotal">$0.00</span></div>
+          <div class="receipt-total-line"><span>Excise &amp; Fees</span><span id="receipt-tax">$0.00</span></div>
+          <div class="receipt-total-line receipt-grand-total"><span>TOTAL PAID</span><span id="receipt-total">$0.00</span></div>
+        </div>
+        <p class="receipt-footer-note">Present this confirmation at duty-free pickup. Track your flight status in the Arrivals board using your confirmation number above.</p>
+      </div>
+      <div class="pass-barcode"></div>
+      <div class="receipt-actions">
+        <button id="receipt-track-btn" class="btn btn-teal">Track This Flight →</button>
+        <button id="receipt-close-btn" class="btn btn-gold">Continue to Terminal</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Mobile bottom nav -->
   <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Quick navigation">
@@ -227,7 +347,7 @@
             </div>
             <button id="puff-btn" class="btn btn-red">Simulate Puff ✈</button>
           </div>
-          <a href="#shop" class="btn btn-gold" style="text-decoration:none;text-align:center">Add to Manifest — $45</a>
+          <button type="button" class="btn btn-gold" style="width:100%" onclick="addConfiguratorToCart()">Add to Manifest — $45</button>
         </div>
       </div>
     </div>
