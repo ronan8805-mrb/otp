@@ -311,12 +311,12 @@ img, video { max-width: 100%; height: auto; }
   left: 0;
   right: 0;
   bottom: 0;
-  height: 6px;
+  height: 12px;
   background: linear-gradient(
     to bottom,
-    var(--otp-red) 0 2px,
-    #FFFFFF 2px 4px,
-    var(--otp-navy) 4px 6px
+    var(--otp-red) 0 4px,
+    #FFFFFF 4px 8px,
+    var(--otp-navy) 8px 12px
   );
 }
 
@@ -1168,12 +1168,12 @@ section {
   top: 0;
   left: 0;
   right: 0;
-  height: 6px;
+  height: 12px;
   background: linear-gradient(
     to bottom,
-    var(--otp-red) 0 2px,
-    #FFFFFF 2px 4px,
-    var(--otp-navy) 4px 6px
+    var(--otp-red) 0 4px,
+    #FFFFFF 4px 8px,
+    var(--otp-navy) 8px 12px
   );
 }
 
