@@ -1292,6 +1292,17 @@ section {
     min-height: 48px;
     display: flex;
     align-items: center;
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+  }
+
+  .nav-links.open a:hover,
+  .nav-links.open a.active {
+    color: var(--otp-gold);
+    background: rgba(201, 162, 39, 0.18);
+    border-color: rgba(201, 162, 39, 0.45);
   }
 
   .nav-mobile-toggle { display: flex; align-items: center; justify-content: center; }
